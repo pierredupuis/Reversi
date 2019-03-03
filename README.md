@@ -1,3 +1,5 @@
-# Template
+# Reversi
 
-Vous trouverez ici un template pour ecrire des projets avec des jsp en Kotlin comme en Java
+Application Web permettant de jouer au Reversi (Ou Othello)
+
+Projet de 3e année ISIMA
