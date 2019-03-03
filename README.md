@@ -1,5 +1,5 @@
 # Reversi
 
-Application Web permettant de jouer au Reversi (Ou Othello)
+Application Web permettant de jouer au Reversi (ou Othello)
 
-Projet de 3e année ISIMA
+Projet du cours de Technologies Web (3e année ISIMA)
