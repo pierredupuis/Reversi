@@ -1,4 +1,4 @@
-// package fr.isima.cours.jee.server.business;
+package fr.isima.cours.jee.server.business;
 
 public enum State {
     WHITE{
@@ -7,7 +7,7 @@ public enum State {
             return BLACK;
         }
         @Override
-        public State name() {
+        public String getName() {
             return "white";
         }
         @Override
@@ -21,7 +21,7 @@ public enum State {
             return WHITE;
         }
         @Override
-        public State name() {
+        public String getName() {
             return "black";
         }
         @Override
@@ -35,7 +35,7 @@ public enum State {
             return null;
         }
         @Override
-        public State name() {
+        public String getName() {
             return "empty";
         }
         @Override
@@ -49,7 +49,7 @@ public enum State {
             return null;
         }
         @Override
-        public State name() {
+        public String getName() {
             return "out";
         }
         @Override
@@ -59,5 +59,5 @@ public enum State {
     };
 
     public abstract State opposite();
-    public abstract State name();
+    public abstract String getName();
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="cours-jee-spring-boot-jsp-templates.template-java.main" target="1.8" />
+      <module name="cours-jee-spring-boot-jsp-templates.template-java.test" target="1.8" />
+      <module name="cours-jee-spring-boot-jsp-templates.template-kotlin.main" target="1.8" />
+      <module name="cours-jee-spring-boot-jsp-templates.template-kotlin.test" target="1.8" />
+      <module name="fr.isima.cours-jee-spring-boot-jsp-templates.main" target="11" />
+      <module name="fr.isima.cours-jee-spring-boot-jsp-templates.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

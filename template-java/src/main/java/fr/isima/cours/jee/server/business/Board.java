@@ -1,3 +1,5 @@
+package fr.isima.cours.jee.server.business;
+
 import java.util.Scanner;
 
 public class Board{
@@ -11,8 +13,6 @@ public class Board{
 		boolean DOWN_LEFT	= false;
 		boolean LEFT		= false;
 		boolean UP_LEFT		= false;
-		
-		// public Directions()
 		
 		public boolean hasAtLeastOne(){
 			return UP || UP_RIGHT || RIGHT || DOWN_RIGHT || DOWN || DOWN_LEFT || LEFT || UP_LEFT;
@@ -35,15 +35,7 @@ public class Board{
         grid[4][4] = State.WHITE;
         grid[3][4] = State.BLACK;
         grid[4][3] = State.BLACK;
-		
-		Scanner sc = new Scanner(System.in);
-		State player = State.BLACK;
-		while(true){
-			print_possible(player);
-			System.out.println("Enter coordinates:");
-			if(play(sc.nextInt(), sc.nextInt(), player))
-				player = player.opposite();
-		}
+
 		
 	}
 	
@@ -126,21 +118,22 @@ public class Board{
 		return nb;
 	}
 	
-	public void print_possible(State st){
-
+	public void print(State st){
+		System.out.println("  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |");
 		for(int j = 0; j < 8; j++){
-			
+			System.out.println("--+---+---+---+---+---+---+---+---+");
+			System.out.print(Integer.toString(j) + " |");
 			for(int i = 0; i < 8; i++){
 				if(grid[i][j] == State.WHITE)
-					System.out.print("W  ");
+					System.out.print(" W |");
 				else if (grid[i][j] == State.BLACK)
-					System.out.print("B  ");
+					System.out.print(" B |");
 				else
-					System.out.print(isPlayable(i,j,st) ? ".  " : "#  ");
+					System.out.print(isPlayable(i,j,st) ? " . |" : "   |");
 			}
 			System.out.println("");
 		}
-		System.out.println("--------------------------------");
+		System.out.println("--+---+---+---+---+---+---+---+---+");
 	}
 	
 	public boolean isPlayable(int x, int y, State st){

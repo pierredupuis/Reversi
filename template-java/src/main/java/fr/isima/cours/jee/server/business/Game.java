@@ -1,8 +1,10 @@
-// package fr.isima.cours.jee.server.business;
+package fr.isima.cours.jee.server.business;
 
-// import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
 
-// @Component
+import java.util.Scanner;
+
+@Component
 public class Game {
 
 
@@ -14,6 +16,7 @@ public class Game {
     }
 	public static void main(String[] args){
 		Game g = new Game();
+		g.console_play();
 	}
 
     public void init(){
@@ -32,5 +35,19 @@ public class Game {
             sb.append("</tr>");
         }
         return sb.toString();
+    }
+
+    public void console_play(){
+
+        Scanner sc = new Scanner(System.in);
+        sc.useDelimiter(",|\\n");
+        State player = State.BLACK;
+
+        while(true){
+            board.print(player);
+            System.out.print("Enter coordinates for " + player.getName() + "s: ");
+            if(board.play(sc.nextInt(), sc.nextInt(), player))
+                player = player.opposite();
+        }
     }
 }
