@@ -21,10 +21,16 @@ public class Board{
 	
 	
     private State[][] grid;
-	
+	private State player;
+	private int nb_turns = 0;
+
 	public Board(){
+		init();
+	}
+	public void init(){
         grid = new State[8][8];
-		
+		player = State.WHITE;
+
 		for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 8; ++j){
                 grid[i][j] = State.EMPTY;
@@ -145,41 +151,66 @@ public class Board{
 			return false;
 		}
 	}
-	public boolean play(int x, int y, State st){
+	public State getPlayer(){
+		return player;
+	}
+	public String getWinner(){
+		if(count(State.BLACK) > count(State.WHITE) )
+			return State.BLACK.getName();
+		else
+			return State.WHITE.getName();
+	}
+	public String getScore(){
+		return "White: " + count(State.WHITE) + " - Black: " + count(State.BLACK);
+	}
+	public boolean hasEnded(){
+		return nb_turns >= 60;
+	}
+	public void skipTurn(){
+		player = player.opposite();
+	}
+	public void reset(){
+		init();
+	}
+	public boolean play(int x, int y){
+
 		if(get(x, y) == State.EMPTY)
 		{
-			Directions dirs = computeChangingDirections(x, y, st);
+			Directions dirs = computeChangingDirections(x, y, player);
 			if(dirs.hasAtLeastOne())
 			{
-				State opp = st.opposite();
+				State opp = player.opposite();
 				int step;
 				
-				set(x,y,st);
+				set(x,y,player);
 				
 				if(dirs.UP)
-					for(step = 1; opp == up(x, y, step, st); step++){}
+					for(step = 1; opp == up(x, y, step, player); step++){}
 
 				if(dirs.UP_RIGHT)
-					for(step = 1; opp == up_right(x, y, step, st); step++){}
-						
+					for(step = 1; opp == up_right(x, y, step, player); step++){}
+
 				if(dirs.RIGHT)
-					for(step = 1; opp == right(x, y, step, st); step++){}
+					for(step = 1; opp == right(x, y, step, player); step++){}
 						
 				if(dirs.DOWN_RIGHT)
-					for(step = 1; opp == down_right(x, y, step, st); step++){}
+					for(step = 1; opp == down_right(x, y, step, player); step++){}
 						
 				if(dirs.DOWN)
-					for(step = 1; opp == down(x, y, step, st); step++){}
+					for(step = 1; opp == down(x, y, step, player); step++){}
 						
 				if(dirs.DOWN_LEFT)
-					for(step = 1; opp == down_left(x, y, step, st); step++){}
+					for(step = 1; opp == down_left(x, y, step, player); step++){}
 						
 				if(dirs.LEFT)
-					for(step = 1; opp == left(x, y, step, st); step++){}
+					for(step = 1; opp == left(x, y, step, player); step++){}
 						
 				if(dirs.UP_LEFT)
-					for(step = 1; opp == up_left(x, y, step, st); step++){}
-				
+					for(step = 1; opp == up_left(x, y, step, player); step++){}
+
+				player = player.opposite();
+				nb_turns++;
+
 				return true;
 			}
 			else{

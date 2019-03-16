@@ -30,7 +30,7 @@ public class Game {
         for(int i = 0; i < 8; ++i){
             sb.append("<tr>");
             for(int j = 0; j < 8; ++j){
-                sb.append("<td>").append(board.get(i,j).toString()).append("</td>");
+                sb.append("<td><a>").append(board.get(i,j).toString()).append("</a></td>");
             }
             sb.append("</tr>");
         }
@@ -46,7 +46,7 @@ public class Game {
         while(true){
             board.print(player);
             System.out.print("Enter coordinates for " + player.getName() + "s: ");
-            if(board.play(sc.nextInt(), sc.nextInt(), player))
+            if(board.play(sc.nextInt(), sc.nextInt()))
                 player = player.opposite();
         }
     }

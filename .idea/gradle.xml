@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/template-kotlin" />
           </set>
         </option>
+        <option name="useAutoImport" value="true" />
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
