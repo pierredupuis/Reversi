@@ -10,7 +10,7 @@
         <title>Reversi</title>
     </head>
     <body>
-        <h1> Reversi </h1>
+        <h1> Simple Reversi </h1>
         <div id="player">
         <style>
             tr {
@@ -34,11 +34,20 @@
         <form action="${pageContext.request.contextPath}/place" method="post">
         <table border="1">
         <%
+            String name;
+            String value;
 
             for(int i =0; i < 8; i++){
                 out.println("<tr>");
                 for(int j =0; j < 8; j++){
-                    out.print("<td><input type=\"submit\" name=\"" + Integer.toString(i) + "_" + Integer.toString(j) + "\" value=\"" + b.get(i,j) + "\"></td>");
+                    name = Integer.toString(i) + "_" + Integer.toString(j);
+                    value = b.get(i,j).getImagePath();
+
+                    %>
+                    <td>
+                        <input type="image" name="<%=name%>" src="<%=value%>" alt="fuck.">
+                    </td>
+                    <%
                 }
                 out.println("</tr>");
             }

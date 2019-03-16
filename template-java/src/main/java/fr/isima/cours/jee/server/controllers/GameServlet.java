@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 @WebServlet({"/place"})
 public class GameServlet extends HttpServlet {
@@ -36,8 +37,7 @@ public class GameServlet extends HttpServlet {
 
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++) {
-
-                if (request.getParameter(i + "_" + j) != null) {
+                if (request.getParameter(i + "_" + j + ".x") != null) {
                     board.play(i, j);
                 }
             }
