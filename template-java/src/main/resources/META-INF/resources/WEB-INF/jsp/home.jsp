@@ -9,6 +9,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Reversi</title>
     </head>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     <body>
         <h1> Simple Reversi </h1>
         <div id="player">
@@ -30,7 +34,6 @@
             else
                 out.println(b.getPlayer().getName());
         %>
-        </div>
         <form action="${pageContext.request.contextPath}/place" method="post">
         <table border="1">
         <%
@@ -56,21 +59,14 @@
         <input type="submit" name="skip" value="Skip" />
         <input type="submit" name="reset" value="Reset" />
         </form>
-        <!--<script type="text/javascript">
-            $(function(){
-                refresh();
-            });
-            function refresh(){
-                setTimeout(refreshOnce,1000);
-            }
-            function refreshOnce(){
-                $.ajax({
-                    url:'${pageContext.request.contextPath}/place'
-                });
-                refresh();
-            };
-
-        </script>-->
+        </div>
+        <script type="text/javascript">
+            setInterval(function(){
+               $('#player').load("http://localhost/place #player",function( response, status, xhr ) {
+                                                                     console.log( xhr.status + " " + xhr.statusText );
+                                                                 });
+            }, 1000);
+        </script>
 
 
     </body>

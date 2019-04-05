@@ -54,6 +54,7 @@ subprojects {
             compile("com.fasterxml.jackson.core:jackson-databind:2.9.8")
         }
         compile("org.apache.commons:commons-lang3:3.8.1")
+        compile("org.webjars", "jquery", "2.1.3")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-tomcat")
         implementation("javax.servlet:jstl")
