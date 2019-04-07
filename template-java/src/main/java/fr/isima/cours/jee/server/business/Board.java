@@ -1,5 +1,13 @@
 package fr.isima.cours.jee.server.business;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Board{
@@ -23,6 +31,7 @@ public class Board{
     private State[][] grid;
 	private State player;
 	private int nb_turns = 0;
+	private String filename = LocalDateTime.now().getNano() + "game.txt";
 
 	public Board(){
 		init();
@@ -123,24 +132,43 @@ public class Board{
         }
 		return nb;
 	}
+	private void saveGame(String s){
+		File file = new File(System.getProperty("user.dir") + "//"+filename);
+		FileWriter fr = null;
+		try {
+			fr = new FileWriter(file);
+			fr.write(s);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			//close resources
+			try {
+				fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
-	public void print(State st){
-		System.out.println("  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |");
+	public String print(State st){
+		StringBuilder sb=new StringBuilder();
+		sb.append("  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n");
 		for(int j = 0; j < 8; j++){
-			System.out.println("--+---+---+---+---+---+---+---+---+");
-			System.out.print(Integer.toString(j) + " |");
+			sb.append("--+---+---+---+---+---+---+---+---+\n");
+			sb.append(Integer.toString(j) + " |");
 			for(int i = 0; i < 8; i++){
 				if(grid[i][j] == State.WHITE)
-					System.out.print(" W |");
+					sb.append(" W |");
 				else if (grid[i][j] == State.BLACK)
-					System.out.print(" B |");
+					sb.append(" B |");
 				else
-					System.out.print(isPlayable(i,j,st) ? " . |" : "   |");
+					sb.append("   |");
 			}
-			System.out.println("");
+			sb.append("\n");
 		}
-		System.out.println("--+---+---+---+---+---+---+---+---+");
-	}
+		sb.append("--+---+---+---+---+---+---+---+---+\n");
+		return sb.toString();
+}
 	
 	public boolean isPlayable(int x, int y, State st){
 		if(get(x, y) == State.EMPTY){
@@ -207,7 +235,7 @@ public class Board{
 						
 				if(dirs.UP_LEFT)
 					for(step = 1; opp == up_left(x, y, step, player); step++){}
-
+				saveGame(print(player));
 				player = player.opposite();
 				nb_turns++;
 
