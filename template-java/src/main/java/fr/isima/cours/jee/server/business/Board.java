@@ -44,7 +44,7 @@ public class Board{
         grid[3][4] = State.BLACK;
         grid[4][3] = State.BLACK;
 
-		
+		nb_turns = 0;
 	}
 	
 	// Get a square's state. If out of the board, returns State.OUT
@@ -175,6 +175,8 @@ public class Board{
 	public State getPlayer(){
 		return player;
 	}
+
+
 	public String getWinner(){
 		if(count(State.BLACK) > count(State.WHITE) )
 			return State.BLACK.getName();

@@ -28,13 +28,24 @@
             }
         </style>
         <%
+            boolean turn = false;
             Board b = (Board) request.getAttribute("board");
+            String color = (String) request.getAttribute("color");
+
             if(b.hasEnded())
                 out.println(b.getWinner() + " wins! " + b.getScore());
-            else
-                out.println(b.getPlayer().getName());
+            else {
+                if(b.getPlayer().getName().equals(color)){
+                    turn = true;
+                    %> <p> Your turn ! </p> <%
+                } else {
+                    %> <p> Your opponent is thinking... </p> <%
+                }
+            }
         %>
-        <form action="${pageContext.request.contextPath}/place" method="post">
+        <br>
+        <br>
+        <form action="${pageContext.request.contextPath}/play" method="post">
         <table border="1">
         <%
             String name;
@@ -56,18 +67,22 @@
             }
         %>
         </table>
-        <input type="submit" name="skip" value="Skip" />
-        <input type="submit" name="reset" value="Reset" />
+        <% if(turn) { %>
+            <input type="submit" name="skip" value="Skip" />
+            <input type="submit" name="reset" value="Reset" />
+        <% } %>
+        <input type="hidden" name="color" value="<%=color%>")>
         </form>
         </div>
-        <script type="text/javascript">
-            setInterval(function(){
-               $('#player').load("http://localhost/place #player",function( response, status, xhr ) {
+        <% if(!b.hasEnded()) { %>
+            <script type="text/javascript">
+                setInterval(function(){
+                $('#player').load("http://localhost/play #player", {color: "<%=color%>"}, function( response, status, xhr ) {
                                                                      console.log( xhr.status + " " + xhr.statusText );
                                                                  });
-            }, 1000);
-        </script>
-
+                }, 1000);
+            </script>
+           <% } %>
 
     </body>
 </html>
