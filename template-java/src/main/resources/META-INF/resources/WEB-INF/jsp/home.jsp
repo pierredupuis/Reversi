@@ -31,6 +31,9 @@
             boolean turn = false;
             Board b = (Board) request.getAttribute("board");
             String color = (String) request.getAttribute("color");
+            if("black".equals(color)){
+                %><style> body { color: white; background-color: black; } </style><%
+            }
 
             if(b.hasEnded())
                 out.println(b.getWinner() + " wins! " + b.getScore());
@@ -44,6 +47,7 @@
             }
         %>
         <br>
+        <p> you are <%=color%> </p>
         <br>
         <form action="${pageContext.request.contextPath}/play" method="post">
         <table border="1">
@@ -69,8 +73,8 @@
         </table>
         <% if(turn) { %>
             <input type="submit" name="skip" value="Skip" />
-            <input type="submit" name="reset" value="Reset" />
         <% } %>
+        <input type="submit" name="reset" value="Reset" />
         <input type="hidden" name="color" value="<%=color%>")>
         </form>
         </div>
