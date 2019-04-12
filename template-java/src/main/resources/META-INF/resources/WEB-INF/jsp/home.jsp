@@ -17,6 +17,11 @@
         <h1> Simple Reversi </h1>
         <div id="player">
         <style>
+            * {
+                margin-right: auto;
+                margin-left: auto;
+                text-align: center;
+                }
             tr {
                 height: 40px
             }
@@ -26,6 +31,7 @@
             table {
                 background-color: #86e540;
             }
+
         </style>
         <%
             boolean turn = false;
@@ -47,23 +53,25 @@
             }
         %>
         <br>
-        <p> you are <%=color%> </p>
+        <p> You are <%=color%> </p>
         <br>
         <form action="${pageContext.request.contextPath}/play" method="post">
         <table border="1">
         <%
             String name;
             String value;
+            String altValue;
 
             for(int i =0; i < 8; i++){
                 out.println("<tr>");
                 for(int j =0; j < 8; j++){
                     name = Integer.toString(i) + "_" + Integer.toString(j);
                     value = b.get(i,j).getImagePath();
+                    altValue = b.get(i, j).toString();
 
                     %>
                     <td>
-                        <input type="image" name="<%=name%>" src="<%=value%>" alt="fuck.">
+                        <input type="image" name="<%=name%>" src="<%=value%>" alt="<%=altValue%>">
                     </td>
                     <%
                 }
@@ -71,6 +79,8 @@
             }
         %>
         </table>
+        <br>
+        <br>
         <% if(turn) { %>
             <input type="submit" name="skip" value="Skip" />
         <% } %>

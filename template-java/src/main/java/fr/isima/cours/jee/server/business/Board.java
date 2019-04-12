@@ -195,6 +195,8 @@ public class Board{
 	public void reset(){
 		init();
 	}
+
+	// Makes a move
 	public boolean play(int x, int y){
 
 		if(get(x, y) == State.EMPTY)
@@ -204,9 +206,16 @@ public class Board{
 			{
 				State opp = player.opposite();
 				int step;
-				
+
+				// place the pawn
 				set(x,y,player);
-				
+
+				// Make changes to the board
+				/*
+				* if(direction has been marked as 'to modify'){
+				*   change color of pawns that direction until it is not an enemy pawn
+				* */
+
 				if(dirs.UP)
 					for(step = 1; opp == up(x, y, step, player); step++){}
 
@@ -244,7 +253,14 @@ public class Board{
 			return false;
 		}
 	}
-	
+
+	/* Given a move (coordinates and color), computes which directions will have to be changed once the move is done.
+	 * Iterates in all directions. Mark a direction true if the given move enclose an opposing set of pawns.
+	 *
+	 * It is useful for two things :
+	 *  - Checking that a move is valid, meaning that he produces a change in at least one direction
+	 *  - Actually making the move and determining (without re-iterating) which directions are to be changed
+	 */
 	public Directions computeChangingDirections(int x, int y, State st){
 		if(get(x, y) == State.EMPTY){
 			State opp = st.opposite();

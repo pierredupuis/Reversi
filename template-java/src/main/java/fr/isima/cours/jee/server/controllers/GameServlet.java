@@ -38,6 +38,7 @@ public class GameServlet extends HttpServlet {
             board.reset();
 
         if(board.getPlayer().getName().equals(color)) {
+            // If it is his turn, searches for the button clicked
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (request.getParameter(i + "_" + j + ".x") != null) {
